@@ -20,3 +20,14 @@ void FSUtil::recursiveDelete(FS &fs, File &root)
 	if (!fs.rmdir(path))
 		throw std::runtime_error(("Failed to remove directory: " + path).c_str());
 }
+
+bool FSUtil::isChildOf(const String &parent, const String &child)
+{
+	if (parent.length() >= child.length())
+		return false;
+	if (child.indexOf(parent) != 0)
+		return false;
+	if (child.charAt(parent.length()) != '/')
+		return false;
+	return true;
+}
