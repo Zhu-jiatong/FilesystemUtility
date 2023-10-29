@@ -31,3 +31,19 @@ bool FSUtil::isChildOf(const String &parent, const String &child)
 		return false;
 	return true;
 }
+
+String FSUtil::parentPath(const String &path)
+{
+	int lastSlash = path.lastIndexOf('/');
+
+	if (lastSlash == 0)
+		return "/";
+
+	if (lastSlash == path.length() - 1)
+		return parentPath(path.substring(0, lastSlash));
+
+	if (lastSlash == -1)
+		return "";
+
+	return path.substring(0, lastSlash);
+}
